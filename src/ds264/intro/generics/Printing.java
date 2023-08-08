@@ -56,7 +56,9 @@ public class Printing {
         getSomeValue = (Integer) myValues.get(1);    //   that compiles fine but will crash
         System.out.println("getSomeValue #2 == " + getSomeValue);
 
-        /// to correct runtime crash:    ArrayList myValues<Integer> = new ArrayList();
+        /// to correct runtime crash AND to no longer have to cast to Integer:
+        //         ArrayList <Integer>myValues = new ArrayList();
+
 
     }
 
