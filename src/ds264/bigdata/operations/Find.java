@@ -15,13 +15,13 @@ public class Find {
      */
     protected static void searchItems(Storeable data, String issueID) {
         String msgFormat = "Search by ID: Class %s took %4d MSec to find Issue: %s %s%n";
-        long startTime, endTime;
+        long _startTimeMS, _endTimeMS;
         String issueDescr;
 
-        startTime = System.currentTimeMillis();
+        _startTimeMS = System.currentTimeMillis();
         issueDescr = data.getDescByID(issueID);
-        endTime = System.currentTimeMillis();
+        _endTimeMS = System.currentTimeMillis();
 
-        System.out.printf((msgFormat), data.getClass().getSimpleName(), (endTime - startTime), issueID, issueDescr);
+        System.out.printf((msgFormat), data.getClass().getSimpleName(), (_endTimeMS - _startTimeMS), issueID, issueDescr);
     }
 }

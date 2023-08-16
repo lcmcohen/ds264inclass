@@ -43,6 +43,7 @@ public class LoadData {
     public void load(String inFileName, int maxRows, String[] firstLastIDs) {
         int rowNum = 0;
         String[] fields = null;
+        long _startTimeMS = System.currentTimeMillis();
 
         System.out.println("LOAD: starting...");
 
@@ -82,9 +83,12 @@ public class LoadData {
 
         if (rowNum > 0)
             firstLastIDs[1] = fields[FLD_ID];   // keep track of last ID
+        long _endTimeMS = System.currentTimeMillis();
 
         System.out.println("LOAD: Completed. Rows: " + (rowNum - 1));
         System.out.println("LOAD: first ID is " + firstLastIDs[0]);
         System.out.println("LOAD: last  ID is " + firstLastIDs[1]);
+        System.out.println("LOAD: elapsed time_ms: " + (_endTimeMS - _startTimeMS));
+        System.out.println();
     }
 }
