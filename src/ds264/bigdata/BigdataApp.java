@@ -14,6 +14,8 @@ import java.util.List;
  * Uses an abstraction called Storeable to represent all data structures being tested.
  * <p>
  * DataSource: <a href="https://data.cityofnewyork.us/City-Government/311-Call-Center-Inquiry/wewp-mm3p">...</a>
+ * Typical command line:
+ *  java -cp out/production/ds264inclass ds264.bigdata.BigdataApp   /Users/mcohen/Downloads/311_Calls_10M.csv  10000000
  */
 public class BigdataApp {
     private static Integer inMaxRows = Integer.MAX_VALUE;   // max rows to input, default to 2**32

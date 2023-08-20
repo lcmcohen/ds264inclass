@@ -3,11 +3,12 @@ package ds264.bigdata.operations;
 import ds264.bigdata.BigdataApp;
 import ds264.bigdata.Storeable;
 
-import java.io.Console;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 /**
  * Manage all operations that can be tested/benchmarked,
- * provides canned operations and a parse-execute for commands from console.
+ * provides canned operations and a parse-execute for commands from stdin.
  */
 public class Operations {
 
@@ -36,42 +37,36 @@ public class Operations {
 
 
     /**
-     * Read and parse commands from console, and execute the appropriate operations against the
-     * specified data structure. Will not work in an IDE.
-     * Keeps reading in a loop until terminated.
+     * Read and parse commands from stdin, and execute the appropriate operations against the
+     * specified data structure. Keeps reading in a loop until terminated.
      */
     public void parseAndExec() {
         String cmdLine;
-        String[] fields = null;
-        Console console = System.console();
-        if (console == null) {
-            throw new UnsupportedOperationException("No Console available in IDE");
-        }
+        final String prompt = "\nEnter a request consisting of:  OPERATION  DATACLASS VALUE\n";
+        String[] fields;
 
-        while ((cmdLine = console.readLine("\nEnter a request consisting of:  OPERATION  DATACLASS VALUE\n")) != null) {
-            Storeable dataClass;
-            try {
+        System.out.println(prompt);
+        try (InputStreamReader isr = new InputStreamReader(System.in);
+             BufferedReader breader = new BufferedReader(isr)) {
+            while ((cmdLine = breader.readLine()) != null) {
                 fields = cmdLine.split(" ");
+                Storeable dataClass;
 
                 switch (fields[0].toUpperCase()) {
-                    case "CANNED":
-                        doCannedOperations();
-                        break;
-                    case "GET":
+                    case "CANNED" -> doCannedOperations();
+                    case "GET" -> {
                         if ((fields.length < 3) || (dataClass = getStoreable(fields[1])) == null) {
-                            console.printf("Invalid parameters for command %\n", fields[0]);
+                            System.out.printf("Invalid parameters for command %s %n", fields[0]);
                             continue;
                         }
                         Find.searchItems(dataClass, (fields[2]));
-                        break;
-                    default:
-                        System.out.println("Unknown Operation: " + fields[0]);
+                    }
+                    default -> System.out.println("Unknown Operation: " + fields[0]);
                 }
-
-            } catch (Exception ex) {
-                console.printf("Exception %s inside of command line processor\n", ex.getLocalizedMessage());
             }
 
+        } catch (Exception ex) {
+            System.out.printf("Exception %s inside of command line processor\n", ex.getLocalizedMessage());
         }
     }
 
@@ -79,7 +74,7 @@ public class Operations {
      * Find a class whose name contains the requested storename (partial match)
      *
      * @param storename - part or all of the name of a Storeable class to find
-     * @return
+     * @return A Storeable class if match is found, else null
      */
     private Storeable getStoreable(String storename) {
         for (Storeable storeable : BigdataApp.storeables) {
