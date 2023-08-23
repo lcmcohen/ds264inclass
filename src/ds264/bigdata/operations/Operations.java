@@ -42,27 +42,35 @@ public class Operations {
      */
     public void parseAndExec() {
         String cmdLine;
-        final String prompt = "\nEnter a request consisting of:  OPERATION  DATACLASS VALUE\n";
+        final String prompt = """
+                \nEnter request consisting of:  OPERATION [VALUE [DATACLASS]]
+                    OPERATION := CANNED | GET
+                    GET is followed by: keyValue data-class-to-use""";
         String[] fields;
 
         System.out.println(prompt);
         try (InputStreamReader isr = new InputStreamReader(System.in);
              BufferedReader breader = new BufferedReader(isr)) {
             while ((cmdLine = breader.readLine()) != null) {
-                fields = cmdLine.split(" ");
+                fields = cmdLine.split(" ", 2); // get operation, and the rest
+                String operator = fields[0].toUpperCase();
                 Storeable dataClass;
 
-                switch (fields[0].toUpperCase()) {
+                switch (operator) {
                     case "CANNED" -> doCannedOperations();
                     case "GET" -> {
-                        if ((fields.length < 3) || (dataClass = getStoreable(fields[1])) == null) {
-                            System.out.printf("Invalid parameters for command %s %n", fields[0]);
+                        // Expecting value of key/ID, and class to use for GET operation
+                        fields = fields[1].split(" ");
+                        if ((fields.length != 2) || (dataClass = getStoreable(fields[1])) == null) {
+                            System.out.printf("Invalid parameters for command %s %n", operator);
                             continue;
                         }
-                        Find.searchItems(dataClass, (fields[2]));
+                        Find.searchItems(dataClass, (fields[0]));
                     }
                     default -> System.out.println("Unknown Operation: " + fields[0]);
                 }
+
+                System.out.println(prompt);
             }
 
         } catch (Exception ex) {
