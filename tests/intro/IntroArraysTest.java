@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class IntroSamplesTest {
+class IntroArraysTest {
 
     @Test
     void arrayPlay_2() {

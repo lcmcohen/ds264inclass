@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * This class contains various sample usages of simple data structures for Intro lecture
  */
-public class IntroSamples {
+public class IntroArrays {
     public static void main(String[] args) {
         System.out.println("Welcome to Data Structures");
 
