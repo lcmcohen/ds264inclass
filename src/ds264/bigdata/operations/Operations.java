@@ -85,6 +85,7 @@ public class Operations {
      * @return A Storeable class if match is found, else null
      */
     private Storeable getStoreable(String storename) {
+        storename = storename.toLowerCase();
         for (Storeable storeable : BigdataApp.storeables) {
             if (storeable.getClass().getSimpleName().toLowerCase().contains(storename))
                 return storeable;   // found a Storeable class that at least partially matches

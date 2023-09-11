@@ -15,7 +15,10 @@ import java.util.List;
  * <p>
  * DataSource: <a href="https://data.cityofnewyork.us/City-Government/311-Call-Center-Inquiry/wewp-mm3p">...</a>
  * Typical command line:
- *  java -cp out/production/ds264inclass ds264.bigdata.BigdataApp   /Users/mcohen/Downloads/311_Calls_10M.csv  10000000
+ *   java -cp out/production/ds264inclass ds264.ds264.bigdata.BigdataApp   /Users/mcohen/Downloads/311_Calls_10M.csv  10000000
+ * Or, if running from IDE and the data file is in your 'java working directory', specify the
+ * following in the Run Configuration as arguments/parameters for application:
+ *   311_Calls_10M.csv  10000000
  */
 public class BigdataApp {
     private static Integer inMaxRows = Integer.MAX_VALUE;   // max rows to input, default to 2**32
