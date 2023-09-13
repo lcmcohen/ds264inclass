@@ -8,8 +8,7 @@ public class FibonacciSeq {
         long startTime, endTime;
         long result;
 
-        // MJC roughly largest w/o BigInt        final long testNum = 4_100_000_000L;
-        final long testNum = 40;
+        final long testNum = 5;
 
         startTime = System.currentTimeMillis();
         result = getFibRecursive(testNum);
