@@ -1,9 +1,9 @@
-package ds264.intro;
+package ds264.intro.bigOexamples;
 
 /**
  * Some non-DS-intensive examples of varied Big O behavior
  */
-public class BigOExamples {
+public class SummingNums {
     public static void main(String[] args) {
         long startTime, endTime;
         long result;
