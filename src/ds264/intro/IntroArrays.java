@@ -103,6 +103,8 @@ public class IntroArrays {
 
         System.out.println(studentNames);           // What's in there?
 
+        String thisStudent = (String) studentNames.get(1);
+
         studentNames.add(700, "Far Out Dude");         // Can we expand it way out?
 
         System.out.println(studentNames.size());    // did it get bigger?
