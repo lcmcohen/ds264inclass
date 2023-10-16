@@ -47,7 +47,7 @@ public class IntroIterator {
              /**/
 
            // if (student.equals("Buddy Rich"))
-             //   studentNames.remove(0);
+             //   studentNames.remove(0);  // gotta know which
         }
 
         Iterator sIter = studentNames.iterator();
@@ -64,8 +64,8 @@ public class IntroIterator {
             String student = (String) sIter.next();
             System.out.println("RE-ITER - Da next one is: " + student);
             /*** remove CURRENT one - based on  VALUE retrieved */
-             if (student.equals("Buddy Rich"))         // also do remove of 0, Gene
-                studentNames.remove(student);     // also do remove of 0, Gene
+             if (student.equals("Buddy Rich"))         // also demo prob with 0, Gene
+                studentNames.remove(student);  /*prob*/   // also demo prob with 0, Gene
              /**/
         }
 
