@@ -54,4 +54,42 @@ public class Route {
         }
         return str;
     }
+
+    /**
+     * Insert a new location (waypoint) as a new segment after an existing location
+     *
+     * @param existingLocation after which to place the new location
+     * @param newLocation      to be inserted after the specified existing location
+     * @return Boolean indicating if able to find existing location and insert after it.
+     */
+    public Boolean insertWaypoint(String existingLocation, String newLocation) {
+
+        // Make a new segment object that represents the new location to be added
+        Segment newSegment = new Segment(newLocation, WAYPOINT_LENGTH);
+
+        // Find the existing location
+        Segment existingSeg = null;
+        for (int ix = 0; ix < segments.length && segments[ix] != null; ix++) {
+            if (segments[ix].location.equals(existingLocation)) {
+                existingSeg = segments[ix];
+                break;
+            }
+        }
+
+        // If we couldn't find existing segment, return null
+        if (existingSeg == null)
+            return false;
+
+        System.out.println("Will add new location after this segment:" + existingSeg);
+
+        // now insert new segment after existing segment
+        /*
+          TODO: OY VEY - need to shift all subsequent segments forward, and may also run out
+          of space and have to make a new array and copy everything
+               AIN'T NO ONE GOT TIME FOR THAT
+         */
+
+
+        return true;
+    }
 }
