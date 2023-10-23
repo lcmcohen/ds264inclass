@@ -10,7 +10,7 @@ import static ds264.intro.lnklstwaze.Segment.WAYPOINT_LENGTH;
 public class Route {
     String destinationName;
     Date lastCalc;              // when this route was last calculated
-    Segment[] segments;         // the various segments, e.g. stops, roads to drive on
+    Segment segments;           // First node of the various segments, e.g. stops, roads to drive on
 
 
     /**
@@ -20,7 +20,7 @@ public class Route {
      */
     public Route(String dest) {
         destinationName = dest;
-        segments = new Segment[20];     // todo how many could we have ?
+        segments = null;
         reCalculate();                  // figure out the segments
     }
 
@@ -30,11 +30,31 @@ public class Route {
      */
     public void reCalculate() {
         // hard code route to Elite Cafe
-        segments[0] = new Segment("Lander", WAYPOINT_LENGTH);
-        segments[1] = new Segment("150th Street", 20);
-        segments[2] = new Segment("75th Ave", 300);
-        segments[3] = new Segment("Main Street", 600);
-        segments[4] = new Segment("Elite Cafe", 0);
+        Segment newSeg, prevSeg;    // temporary references to segments
+
+        // First segment is a special case - must be 'anchored' by Route
+        newSeg = new Segment("Lander", WAYPOINT_LENGTH);
+        this.segments = newSeg;  // make Route object point to first segment
+
+        prevSeg = newSeg;       // Keep a reference to new seg, which will now be 'previous'
+        newSeg =  new Segment("150th Street", 20);  // get new segment
+        prevSeg.setNextSegment(newSeg);             // point prev seg to new seg
+
+        prevSeg = newSeg;
+        newSeg = new Segment("75th Ave", 300);
+        prevSeg.setNextSegment(newSeg);
+
+        prevSeg = newSeg;
+        newSeg = new Segment("Main Street", 600);
+        prevSeg.setNextSegment(newSeg);
+
+        prevSeg = newSeg;
+        newSeg = new Segment("Elite Cafe", 0);
+        prevSeg.setNextSegment(newSeg);
+
+        // TODO: all of the above could be shortened with a generalized add() method
+
+        newSeg.setNextSegment(null);
         lastCalc = new Date();
     }
 
@@ -47,7 +67,7 @@ public class Route {
         String str = String.format("Route for %s calculated at %s\n",
                 destinationName, lastCalc);
         // add in each segment
-        for (Segment seg : segments) {
+        for (Segment seg = this.segments; seg != null; seg = seg.getNextSegment()) {
             if (seg != null) {
                 str += seg + "\n";
             }
@@ -69,9 +89,9 @@ public class Route {
 
         // Find the existing location
         Segment existingSeg = null;
-        for (int ix = 0; ix < segments.length && segments[ix] != null; ix++) {
-            if (segments[ix].location.equals(existingLocation)) {
-                existingSeg = segments[ix];
+        for (Segment seg = this.segments; seg != null; seg = seg.getNextSegment())  {
+            if (seg.location.equals(existingLocation)) {
+                existingSeg = seg;
                 break;
             }
         }
@@ -83,12 +103,12 @@ public class Route {
         System.out.println("Will add new location after this segment:" + existingSeg);
 
         // now insert new segment after existing segment
-        /*
-          TODO: OY VEY - need to shift all subsequent segments forward, and may also run out
-          of space and have to make a new array and copy everything
-               AIN'T NO ONE GOT TIME FOR THAT
-         */
 
+        // point the new segments 'next' pointer to the same next node pointed to by existing node
+        newSegment.setNextSegment(existingSeg.getNextSegment());
+
+        // point the existing segment's next to the new segment
+        existingSeg.setNextSegment(newSegment);
 
         return true;
     }
