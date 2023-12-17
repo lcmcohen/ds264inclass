@@ -13,12 +13,10 @@ public class Tray {
 
     @Override
     public String toString() {
-        //     String topLine =    "\\                               /" + "\n";
         String bottomLine = "  \\____________________________/" + " \n";
         String middleLine = " \\" + padString(name, bottomLine.length() - 3, isDirty) + "/"
                 + "\n";
-
-        return /* topLine +  */  middleLine + bottomLine;
+        return   middleLine + bottomLine;
     }
 
 

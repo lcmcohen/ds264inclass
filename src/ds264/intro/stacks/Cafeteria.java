@@ -1,10 +1,9 @@
 package ds264.intro.stacks;
 
-import java.util.Random;
 import java.util.Stack;
 
 public class Cafeteria {
-    Stack <Tray>trays;
+    static Stack <Tray>trays;
 
     public static void  main (String[] args) {
 
@@ -15,22 +14,34 @@ public class Cafeteria {
         Tray t = cafeteria.takeTray();
         System.out.println("took this tray: \n" + t);
 
+        // What does next tray look like? should I go eat elsewhere?
+        if (trays.peek().isDirty) {
+            System.out.println("next tray is dirty: " + trays.peek().name);
+        } else
+            System.out.println("next tray is not dirty: " + trays.peek().name);
+
+        t = cafeteria.takeTray();
+        System.out.println("took this tray: \n" + t);
+
+        // What does next tray look like? should I go eat elsewhere?
+        if (trays.peek().isDirty) {
+            System.out.println("next tray is dirty: " + trays.peek().name);
+        } else
+            System.out.println("next tray is not dirty: " + trays.peek().name);
+
     }
 
     private  void setupTrays() {
 
-        trays = new Stack();
+        trays = new Stack<>();
 
-        trays.add(new Tray("bottom", true));   // ooh lets me do an add, versus a push
-        trays.add(new Tray("middle", false));
-        trays.add(new Tray("top", false));
+        trays.add(new Tray("BOTTOM TRAY", true));   // ooh! lets me do an add, versus a push
+        trays.add(new Tray("MIDDLE TRAY", false));
+        trays.add(new Tray("TOP TRAY", false));
 
-        Tray tray = trays.get(0);
+        Tray tray = trays.get(0);  // ooh! lets me do this
 
-        System.out.println("after setup trays:\n" + this.toString());
-
-        // peek ?
-
+        System.out.println("after setup trays:\n" + this);
     }
 
 
@@ -41,7 +52,7 @@ public class Cafeteria {
      */
     Tray takeTray() {
         Tray tray = trays.pop();
-        System.out.println("after take (pop) a  tray:\n" + this.toString());
+        System.out.println("after take (pop) a  tray:\n" + this);
         return tray;
     }
 
