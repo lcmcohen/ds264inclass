@@ -1,6 +1,7 @@
 package ds264.univ;
 
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
@@ -10,10 +11,10 @@ import java.util.Queue;
  * TODO priority definition is TBD. Currently in order of registration
  */
 public class StudentRegistration {
-    Queue<String> studentRegQueue;
+    Queue<LanderStudent> studentRegQueue;
 
     StudentRegistration() {
-        studentRegQueue = new LinkedList<>();
+        studentRegQueue = new PriorityQueue<>();
     }
 
 
@@ -22,7 +23,7 @@ public class StudentRegistration {
      *
      * @param student a student to enroll
      */
-    void enrollStudent(String student) {
+    void enrollStudent(LanderStudent student) {
         // add the student to the registration queue
         studentRegQueue.offer(student);
     }
@@ -33,7 +34,7 @@ public class StudentRegistration {
      *
      * @return The next student to have choice of limited courses.
      */
-    String getNextHighestPriStudent() {
+    LanderStudent getNextHighestPriStudent() {
         return studentRegQueue.poll();
     }
 
