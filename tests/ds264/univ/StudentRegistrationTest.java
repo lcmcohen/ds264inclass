@@ -21,7 +21,7 @@ class StudentRegistrationTest {
     @Test
     void enrollStudent() {
         // arrange
-        String newStudent = "Moshe";
+        String newStudent = "Jones, Moshe";
         int howMany = reg.howManyStudentsLeft();
 
         // act
@@ -34,15 +34,18 @@ class StudentRegistrationTest {
         assertEquals(newStudent, reg.getNextHighestPriStudent());
     }
 
+    /**
+     * TODO will have to decide what is real priority for student registration
+     */
     @Test
     void getNextHighestPriStudent() {
 
-        String firstStudent = "EarlyBird, GetsTheWorm";
-        reg.enrollStudent(firstStudent);
+        String expectedNextToRegister;
+        reg.enrollStudent((expectedNextToRegister = "EarlyBird, GetsTheWorm"));
         reg.enrollStudent("Middle, Manny");
         reg.enrollStudent("Alas, AlwaysLast");
 
         // assert - the first student to register has the highest priority
-        assertEquals(firstStudent, reg.getNextHighestPriStudent());
+        assertEquals(expectedNextToRegister, reg.getNextHighestPriStudent());
     }
 }
