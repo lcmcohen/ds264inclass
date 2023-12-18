@@ -13,8 +13,8 @@ import java.util.Queue;
 public class StudentRegistration {
     Queue<LanderStudent> studentRegQueue;
 
-    StudentRegistration() {
-        studentRegQueue = new PriorityQueue<>();
+    StudentRegistration(Queue<LanderStudent> studentQueue) {
+        studentRegQueue = studentQueue;
     }
 
 

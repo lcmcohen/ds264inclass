@@ -4,6 +4,9 @@ package ds264.univ;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.PriorityQueue;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StudentRegistrationTest {
@@ -15,7 +18,8 @@ class StudentRegistrationTest {
      */
     @BeforeEach
     void setUp() {
-        reg = new StudentRegistration();
+
+        reg = new StudentRegistration(new PriorityQueue<LanderStudent>());
     }
 
     @Test
