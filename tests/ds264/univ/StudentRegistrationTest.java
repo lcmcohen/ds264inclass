@@ -4,6 +4,9 @@ package ds264.univ;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.PriorityQueue;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StudentRegistrationTest {
@@ -15,13 +18,14 @@ class StudentRegistrationTest {
      */
     @BeforeEach
     void setUp() {
-        reg = new StudentRegistration();
+
+        reg = new StudentRegistration(new PriorityQueue<LanderStudent>());
     }
 
     @Test
     void enrollStudent() {
         // arrange
-        String newStudent = "Jones, Moshe";
+        LanderStudent newStudent = new LanderStudent("Jones, Moshe", 1960);
         int howMany = reg.howManyStudentsLeft();
 
         // act
@@ -40,12 +44,13 @@ class StudentRegistrationTest {
     @Test
     void getNextHighestPriStudent() {
 
-        String expectedNextToRegister;
-        reg.enrollStudent((expectedNextToRegister = "EarlyBird, GetsTheWorm"));
-        reg.enrollStudent("Middle, Manny");
-        reg.enrollStudent("Alas, AlwaysLast");
+        LanderStudent expectedNextToRegister;
+
+        reg.enrollStudent(expectedNextToRegister = new LanderStudent("EarlyBird, GetsTheWorm", 2005));
+        reg.enrollStudent(new LanderStudent("Middle, Manny", 2004));
+        reg.enrollStudent(new LanderStudent("Alas, AlwaysLast", 2000)); // would be Expected
 
         // assert - the first student to register has the highest priority
-        assertEquals(expectedNextToRegister, reg.getNextHighestPriStudent());
+        assertEquals(expectedNextToRegister, reg.getNextHighestPriStudent());  //TODO would have to adjust what is our priority
     }
 }
