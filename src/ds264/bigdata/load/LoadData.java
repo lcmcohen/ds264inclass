@@ -36,18 +36,18 @@ public class LoadData {
     /**
      * Load data from specified file
      *
-     * @param inFileName   Name of input file to read from
+     * @param rdrIn   Stream of input file to read from
      * @param maxRows      max num of rows to read in (file may have more or less). Not including header row
-     * @param firstLastIDs
+     * @param firstLastIDs give back the first and last ID values loaded
      */
-    public void load(String inFileName, int maxRows, String[] firstLastIDs) {
+    public void load(Reader rdrIn,  int maxRows, String[] firstLastIDs) {
         int rowNum = 0;
         String[] fields = null;
         long _startTimeMS = System.currentTimeMillis();
 
         System.out.println("LOAD: starting...");
 
-        try (BufferedReader br = new BufferedReader(new FileReader(inFileName))) {
+        try (BufferedReader br = new BufferedReader(rdrIn)) {
             String currLine;
             while ((currLine = br.readLine()) != null) {
                 fields = currLine.split(",");
@@ -75,7 +75,7 @@ public class LoadData {
                     System.out.println("LOAD: Progress. Rows: " + rowNum);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("LOAD: Could not find/open file: " + inFileName);
+            System.out.println("LOAD: Could not find/open file: " + rdrIn);
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);

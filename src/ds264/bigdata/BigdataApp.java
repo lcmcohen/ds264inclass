@@ -5,6 +5,8 @@ import ds264.bigdata.operations.Operations;
 import ds264.bigdata.storage.StoreInArray;
 import ds264.bigdata.storage.StoreInHashM;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +73,13 @@ public class BigdataApp {
 
         // pass list of Storeable classes to Loader, will load all data into all classes
         LoadData loader = new LoadData(storeables);
-        loader.load(inFileName, inMaxRows, firstLastIDs);
+        try {
+            FileReader dataFile = new FileReader(inFileName);
+            loader.load(dataFile, inMaxRows, firstLastIDs);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 
