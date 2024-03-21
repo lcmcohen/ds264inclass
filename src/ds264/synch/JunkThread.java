@@ -5,14 +5,14 @@ public class JunkThread implements Runnable{
     JunkThread(Object lock) {
         this.lock = lock;
         Thread curThread = Thread.currentThread();
-        System.out.println(curThread.getName() + " " + curThread.getPriority() + " " + curThread.threadId());
+        System.out.println(curThread.getName() + " " + curThread.getPriority() + " " + curThread.getId());
     }
 
 
     @Override
     public void run() {
         Thread curThread = Thread.currentThread();
-        System.out.println(curThread.getName() + " " + curThread.getPriority() + " " + curThread.threadId());
+        System.out.println(curThread.getName() + " " + curThread.getPriority() + " " + curThread.getId());
 
         try {
             Thread.sleep(10 * 1000);

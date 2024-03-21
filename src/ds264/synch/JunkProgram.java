@@ -8,7 +8,7 @@ public class JunkProgram {
     private void doStuff() {
 
         Thread curThread = Thread.currentThread();
-        System.out.println(curThread.getName() + " " + curThread.getPriority() + " " + curThread.threadId());
+        System.out.println(curThread.getName() + " " + curThread.getPriority() + " " + curThread.getId());
 
         Thread otherThread = new Thread( new JunkThread(this));
         otherThread.start();
