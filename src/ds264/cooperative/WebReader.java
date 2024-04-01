@@ -31,7 +31,7 @@ class WebReader implements Runnable {
             synchronized (content) {
                     content.contents = readWeb();
                     content.counter++;
-                    System.out.println("About to notify the waiter..");
+                    System.out.println("We have Read # " + content.counter + " -->About to notify the waiter...");
                     content.notify();
                     System.out.println("Done notifying the waiter.");
             }

@@ -32,15 +32,20 @@ class WebResponseAnalyzer implements Runnable {
                 try {
                     System.out.println("WebResponseAnalyzer is now waiting on the lock");
                     content.wait();
-                    System.out.println("WebResponseAnalyzer just got notified!");
+                    System.out.println("WebResponseAnalyzer just got notified!, counter = " + content.counter);
                     System.out.println(content.contents);
                     writer.write(content.contents);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
+
+
+
+
         }
     }
 }
