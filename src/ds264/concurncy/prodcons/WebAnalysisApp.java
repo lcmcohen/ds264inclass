@@ -1,4 +1,4 @@
-package ds264.cooperative;
+package ds264.concurncy.prodcons;
 
 /**
  * Application that concurrently reads data from web, writing it out to a file.

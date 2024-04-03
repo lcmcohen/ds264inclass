@@ -1,4 +1,4 @@
-package ds264.cooperative;
+package ds264.concurncy.prodcons;
 
 import java.io.BufferedReader;
 import java.io.IOException;

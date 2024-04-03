@@ -1,4 +1,4 @@
-package ds264.cooperative;
+package ds264.concurncy.prodcons;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -42,7 +42,11 @@ class WebResponseAnalyzer implements Runnable {
                     throw new RuntimeException(e);
                 }
             }
-
+            try {
+                Thread.sleep(3 * 1000);  //
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
 
 
