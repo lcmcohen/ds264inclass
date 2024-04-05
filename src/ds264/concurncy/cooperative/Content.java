@@ -1,4 +1,4 @@
-package ds264.cooperative;
+package ds264.concurncy.cooperative;
 
 /**
  * Content object for website analysis
